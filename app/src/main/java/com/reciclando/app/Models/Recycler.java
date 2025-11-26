@@ -24,7 +24,6 @@ public class Recycler {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Enumerated(EnumType.STRING)
     private List<Material> acceptedMaterials;
 
     protected Recycler() {
