@@ -113,6 +113,14 @@ public class Post {
         this.materialCategory = materialCategory;
     }
 
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public OffsetDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
     @Override
     public String toString() {
         return "Post [id=" + id + ", title=" + title + ", description=" + description + ", photoPath=" + photoPath
