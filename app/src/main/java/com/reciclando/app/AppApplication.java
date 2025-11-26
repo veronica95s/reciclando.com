@@ -18,7 +18,6 @@ import com.reciclando.app.Repositories.AddressRepository;
 import com.reciclando.app.Repositories.DonorRepository;
 import com.reciclando.app.Repositories.PostRepository;
 import com.reciclando.app.Repositories.RecyclerRepository;
-import com.reciclando.app.Repositories.UserRepository;
 
 @SpringBootApplication
 public class AppApplication {
@@ -29,7 +28,6 @@ public class AppApplication {
 
 	@Bean
 	CommandLineRunner seedData(
-			UserRepository userRepo,
 			PostRepository postRepo,
 			DonorRepository donorRepo,
 			RecyclerRepository recyclerRepo,
