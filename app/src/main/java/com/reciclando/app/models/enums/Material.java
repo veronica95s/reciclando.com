@@ -1,4 +1,4 @@
-package com.reciclando.app.models.enums;
+package com.reciclando.app.Models.enums;
 
 public enum Material {
     PLASTIC,

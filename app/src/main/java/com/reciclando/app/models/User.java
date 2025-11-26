@@ -1,6 +1,6 @@
-package com.reciclando.app.models;
+package com.reciclando.app.Models;
 
-import com.reciclando.app.models.enums.AccountType;
+import com.reciclando.app.Models.enums.AccountType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

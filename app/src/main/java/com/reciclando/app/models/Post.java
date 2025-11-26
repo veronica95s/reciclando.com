@@ -1,8 +1,8 @@
-package com.reciclando.app.models;
+package com.reciclando.app.Models;
 
 import java.time.OffsetDateTime;
 
-import com.reciclando.app.models.enums.Material;
+import com.reciclando.app.Models.enums.Material;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

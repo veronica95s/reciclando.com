@@ -1,4 +1,4 @@
-package com.reciclando.app.models;
+package com.reciclando.app.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

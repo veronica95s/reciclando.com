@@ -7,18 +7,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.reciclando.app.models.Address;
-import com.reciclando.app.models.Donor;
-import com.reciclando.app.models.Post;
-import com.reciclando.app.models.Recycler;
-import com.reciclando.app.models.User;
-import com.reciclando.app.models.enums.AccountType;
-import com.reciclando.app.models.enums.Material;
-import com.reciclando.app.repositories.AddressRepository;
-import com.reciclando.app.repositories.DonorRepository;
-import com.reciclando.app.repositories.PostRepository;
-import com.reciclando.app.repositories.RecyclerRepository;
-import com.reciclando.app.repositories.UserRepository;
+import com.reciclando.app.Models.Address;
+import com.reciclando.app.Models.Donor;
+import com.reciclando.app.Models.Post;
+import com.reciclando.app.Models.Recycler;
+import com.reciclando.app.Models.User;
+import com.reciclando.app.Models.enums.AccountType;
+import com.reciclando.app.Models.enums.Material;
+import com.reciclando.app.Repositories.AddressRepository;
+import com.reciclando.app.Repositories.DonorRepository;
+import com.reciclando.app.Repositories.PostRepository;
+import com.reciclando.app.Repositories.RecyclerRepository;
+import com.reciclando.app.Repositories.UserRepository;
 
 @SpringBootApplication
 public class AppApplication {
