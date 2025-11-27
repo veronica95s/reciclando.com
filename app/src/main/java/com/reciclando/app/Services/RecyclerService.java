@@ -1,8 +1,8 @@
 package com.reciclando.app.Services;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.reciclando.app.Models.Recycler;
@@ -11,6 +11,7 @@ import com.reciclando.app.Models.enums.Material;
 import com.reciclando.app.Repositories.RecyclerRepository;
 import com.reciclando.app.Repositories.UserRepository;
 
+@Service
 public class RecyclerService {
 
     private final RecyclerRepository recyclerRepository;
@@ -20,35 +21,35 @@ public class RecyclerService {
         this.recyclerRepository = recyclerRepository;
         this.userRepository = userRepository;
     }
-    
+
     @Transactional
-    public Recycler registerRecycler(Long userId, List<Material> acceptedMaterials) {
-        Optional<User> userOpt = userRepository.findById(userId);
-        if (userOpt.isEmpty()) {
-            throw new IllegalArgumentException("User not found with id: " + userId);
-        }
+    public Recycler createRecycler(Long userId, List<Material> acceptedMaterials) {
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
+
         if (recyclerRepository.existsById(userId)) {
-            throw new IllegalArgumentException("Recycler already registered for user id: " + userId);
+            throw new IllegalArgumentException("Recycler already exists for user id: " + userId);
         }
-        User user = userOpt.get();
+
         Recycler recycler = new Recycler(user, acceptedMaterials);
         return recyclerRepository.save(recycler);
     }
 
     @Transactional
-    public void updateMaterials(Long userID, List<Material> newMaterials){
+    public Recycler updateMaterials(Long userID, List<Material> newMaterials){
         Recycler recycler = recyclerRepository.findById(userID)
             .orElseThrow(() -> new IllegalArgumentException("Recycler not found with user id: " + userID));
         recycler.setAcceptedMaterials(newMaterials);
+        return recyclerRepository.save(recycler);
     }
 
-    public Recycler getByUserID(Long userID){
+    public Recycler getByUserId(Long userID){
         return recyclerRepository.findById(userID)
             .orElseThrow(() -> new IllegalArgumentException("Recycler not found with user id: " + userID));
     }
 
     public List<Recycler> getAll(){
-        return (List<Recycler>) recyclerRepository.findAll();
+        return recyclerRepository.findAll();
     }
 
     @Transactional
@@ -59,9 +60,7 @@ public class RecyclerService {
         recyclerRepository.deleteById(userID);
     }
 
-    public List<Recycler> findByAcceptedMaterial(Material material){
+    public List<Recycler> findByAcceptedMaterials(Material material){
         return recyclerRepository.findByAcceptedMaterialsContaining(material.name());
     }
-
-
 }
