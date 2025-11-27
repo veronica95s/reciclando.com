@@ -18,7 +18,6 @@ import com.reciclando.app.Repositories.AddressRepository;
 import com.reciclando.app.Repositories.DonorRepository;
 import com.reciclando.app.Repositories.PostRepository;
 import com.reciclando.app.Repositories.RecyclerRepository;
-import com.reciclando.app.Repositories.UserRepository;
 
 @SpringBootApplication
 public class AppApplication {
@@ -29,7 +28,6 @@ public class AppApplication {
 
 	@Bean
 	CommandLineRunner seedData(
-			UserRepository userRepo,
 			PostRepository postRepo,
 			DonorRepository donorRepo,
 			RecyclerRepository recyclerRepo,
@@ -42,18 +40,18 @@ public class AppApplication {
 			Address recyclerAddress = new Address("98765-432", "Example Town", "ET");
 			addressRepo.save(recyclerAddress);
 
-			// USER - DONOR
+			// DONOR
 			User donorUser = new User("John", "Doe", "1234567890", AccountType.DONOR);
 			donorUser.setAddress(donorAddress);
 			Donor donor = new Donor(donorUser);
 
-			// USER - RECYCLER
+			// RECYCLER
 			User recyclerUser = new User("Jane", "Smith", "0987654321", AccountType.RECYCLER);
 			recyclerUser.setAddress(recyclerAddress);
 			List<Material> materials = List.of(Material.PAPER, Material.PLASTIC);
 			Recycler recycler = new Recycler(recyclerUser, materials);
 
-			// POST by DONOR
+			// POSTS
 			Post post = new Post(
 					"Old Newspaper",
 					"Bundle of old newspapers available for recycling.",
@@ -62,8 +60,6 @@ public class AppApplication {
 			post.setLocation(donorAddress);
 
 			// Save to repositories
-			userRepo.save(donorUser);
-			userRepo.save(recyclerUser);
 			donorRepo.save(donor);
 			recyclerRepo.save(recycler);
 			postRepo.save(post);
