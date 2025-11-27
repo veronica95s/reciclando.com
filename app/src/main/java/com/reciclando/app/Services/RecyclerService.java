@@ -61,6 +61,14 @@ public class RecyclerService {
     }
 
     public List<Recycler> findByAcceptedMaterial(Material material) {
-        return recyclerRepository.findByAcceptedMaterialsContaining(material.name());
+        return recyclerRepository.findByAcceptedMaterialsContaining(material);
+    }
+
+    public List<Recycler> findByCity(String city) {
+        return recyclerRepository.findByCity(city);
+    }
+
+    public List<Recycler> findByCityAndMaterial(String city, Material material) {
+        return recyclerRepository.findByCityAndMaterial(city, material);
     }
 }
