@@ -43,9 +43,9 @@ public class RecyclerService {
         return recyclerRepository.save(recycler);
     }
 
-    public Recycler getByUserId(Long userID){
-        return recyclerRepository.findById(userID)
-            .orElseThrow(() -> new IllegalArgumentException("Recycler not found with user id: " + userID));
+    public Recycler getByUserID(Long userId) {
+        return recyclerRepository.findById(userId)
+            .orElseThrow(() -> new IllegalArgumentException("Recycler not found with user id: " + userId));
     }
 
     public List<Recycler> getAll(){
@@ -62,5 +62,22 @@ public class RecyclerService {
 
     public List<Recycler> findByAcceptedMaterials(Material material){
         return recyclerRepository.findByAcceptedMaterialsContaining(material.name());
+    }
+
+    public List<Recycler> findByAcceptedMaterial(Material material) {
+        return recyclerRepository.findByAcceptedMaterialsContaining(material.name());
+    }
+
+    @Transactional
+    public Recycler registerRecycler(Long userId, List<Material> acceptedMaterials) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
+
+        if (recyclerRepository.existsById(userId)) {
+            throw new IllegalArgumentException("Recycler already exists for user id: " + userId);
+        }
+
+        Recycler recycler = new Recycler(user, acceptedMaterials);
+        return recyclerRepository.save(recycler);
     }
 }
