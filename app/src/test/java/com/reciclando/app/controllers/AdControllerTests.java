@@ -1,4 +1,4 @@
-package com.reciclando.app.controllers;
+package com.reciclando.app.Controllers;
 
 import java.util.ArrayList;
 import java.util.List;
