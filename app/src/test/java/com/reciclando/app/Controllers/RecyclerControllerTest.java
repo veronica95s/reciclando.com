@@ -92,10 +92,10 @@ public class RecyclerControllerTest {
 
         CreateRecyclerDTO dto = new CreateRecyclerDTO(savedUser.getId(), List.of(Material.PLASTIC, Material.METAL));
 
-        mockMvc.perform(post("/api/v1/recyclers")
+        mockMvc.perform(post("/api/v1/recyclers/new")  // Mudou aqui: /new
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(dto)))
-            .andExpect(status().isOk())
+            .andExpect(status().isCreated())  // Mudou aqui: 201 Created
             .andExpect(jsonPath("$.userId").value(savedUser.getId()))
             .andExpect(jsonPath("$.acceptedMaterials").isArray())
             .andExpect(jsonPath("$.acceptedMaterials.length()").value(2));
@@ -121,16 +121,18 @@ public class RecyclerControllerTest {
 
     @Test
     void testFindByMaterial() throws Exception {
-        mockMvc.perform(get("/api/v1/recyclers/material/PAPER"))
+        mockMvc.perform(get("/api/v1/recyclers")
+                .param("material", "PAPER"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$").isArray())
-            .andExpect(jsonPath("$.length()").value(2)) 
+            .andExpect(jsonPath("$.length()").value(2))
             .andExpect(jsonPath("$[0].acceptedMaterials").isArray());
     }
 
     @Test
     void testFindByCity() throws Exception {
-        mockMvc.perform(get("/api/v1/recyclers/city/Example Town"))
+        mockMvc.perform(get("/api/v1/recyclers")
+                .param("city", "Example Town"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$").isArray())
             .andExpect(jsonPath("$[0].firstName").value("Jane"))
@@ -139,7 +141,9 @@ public class RecyclerControllerTest {
 
     @Test
     void testFindByCityAndMaterial() throws Exception {
-        mockMvc.perform(get("/api/v1/recyclers/city/Example Town/material/PLASTIC"))
+        mockMvc.perform(get("/api/v1/recyclers")
+                .param("city", "Example Town")
+                .param("material", "PLASTIC"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$").isArray())
             .andExpect(jsonPath("$[0].firstName").value("Jane"))
@@ -148,7 +152,8 @@ public class RecyclerControllerTest {
 
     @Test
     void testFindByMaterialNotFound() throws Exception {
-        mockMvc.perform(get("/api/v1/recyclers/material/GLASS"))
+        mockMvc.perform(get("/api/v1/recyclers")
+                .param("material", "GLASS"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$").isArray())
             .andExpect(jsonPath("$.length()").value(0));
@@ -156,7 +161,8 @@ public class RecyclerControllerTest {
 
     @Test
     void testFindByCityNotFound() throws Exception {
-        mockMvc.perform(get("/api/v1/recyclers/city/NonExistentCity"))
+        mockMvc.perform(get("/api/v1/recyclers")
+                .param("city", "NonExistentCity"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$").isArray())
             .andExpect(jsonPath("$.length()").value(0));

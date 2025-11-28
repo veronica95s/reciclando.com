@@ -71,4 +71,13 @@ public class RecyclerService {
     public List<Recycler> findByCityAndMaterial(String city, Material material) {
         return recyclerRepository.findByCityAndMaterial(city, material);
     }
+
+    public List<Recycler> search(String city, Material material) {
+        if (city != null && material != null) {
+            return findByCityAndMaterial(city, material);
+        }
+        if (city != null) return findByCity(city);
+        if (material != null) return findByAcceptedMaterial(material);
+        return getAll();
+    }
 }
