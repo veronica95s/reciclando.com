@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.reciclando.app.Models.Ad;
 import com.reciclando.app.Services.AdService;
 import com.reciclando.app.dtos.ad.AdRequestDto;
 import com.reciclando.app.dtos.ad.AdResponseDto;
@@ -20,7 +19,7 @@ import com.reciclando.app.dtos.ad.AdResponseDto;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
-@RequestMapping("/anuncios")
+@RequestMapping("/api/v1/ads")
 public class AdController {
 
     private final AdService postService;
@@ -30,8 +29,8 @@ public class AdController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AdResponseDto>> getPosts(@RequestParam(required = false) String filtro) {
-        List<AdResponseDto> posts = postService.getAdsOrderByCreatedAt(filtro);
+    public ResponseEntity<List<AdResponseDto>> getPosts(@RequestParam(required = false) String filter) {
+        List<AdResponseDto> posts = postService.getAdsOrderByCreatedAt(filter);
         return ResponseEntity.status(HttpStatus.OK).body(posts);
     }
 
@@ -45,13 +44,13 @@ public class AdController {
         }
     }
 
-    @PostMapping("/novo")
-    public ResponseEntity<Object> createPost(@RequestBody AdRequestDto post) {
+    @PostMapping("/new")
+    public ResponseEntity<AdResponseDto> createPost(@RequestBody AdRequestDto postRequest) {
         try {
-            Ad createdPost = postService.createPost(post);
+            AdResponseDto createdPost = postService.createPost(postRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 }

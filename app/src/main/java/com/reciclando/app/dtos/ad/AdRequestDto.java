@@ -6,6 +6,13 @@ public class AdRequestDto {
     private Long donorId;
     private String materialCategory;
 
+    public AdRequestDto(String title, String description, Long donorId, String materialCategory) {
+        this.title = title;
+        this.description = description;
+        this.donorId = donorId;
+        this.materialCategory = materialCategory;
+    }
+
     public String getTitle() {
         return title;
     }

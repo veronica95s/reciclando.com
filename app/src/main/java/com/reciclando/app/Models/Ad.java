@@ -32,7 +32,7 @@ public class Ad {
     private Address location;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "donor_id")
     private Donor donor;
 
     @Enumerated(EnumType.STRING)
