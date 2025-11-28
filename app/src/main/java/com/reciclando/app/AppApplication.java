@@ -1,23 +1,7 @@
 package com.reciclando.app;
 
-import java.util.List;
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import com.reciclando.app.Models.Address;
-import com.reciclando.app.Models.Donor;
-import com.reciclando.app.Models.Post;
-import com.reciclando.app.Models.Recycler;
-import com.reciclando.app.Models.User;
-import com.reciclando.app.Models.enums.AccountType;
-import com.reciclando.app.Models.enums.Material;
-import com.reciclando.app.Repositories.AddressRepository;
-import com.reciclando.app.Repositories.DonorRepository;
-import com.reciclando.app.Repositories.PostRepository;
-import com.reciclando.app.Repositories.RecyclerRepository;
 
 @SpringBootApplication
 public class AppApplication {
