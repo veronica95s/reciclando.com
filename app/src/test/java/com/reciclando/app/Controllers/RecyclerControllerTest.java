@@ -83,7 +83,7 @@ public class RecyclerControllerTest {
 
     @Test
     void testCreateRecycler() throws Exception {
-        Address newAddress = new Address("11111-111", "New City", "NC");
+        Address newAddress = new Address("11111-111", "New City", "NC", "Test Neighborhood");
         addressRepository.save(newAddress);
         
         User newUser = new User("Bob", "Test", "1111111111", AccountType.RECYCLER);
@@ -92,10 +92,10 @@ public class RecyclerControllerTest {
 
         CreateRecyclerDTO dto = new CreateRecyclerDTO(savedUser.getId(), List.of(Material.PLASTIC, Material.METAL));
 
-        mockMvc.perform(post("/api/v1/recyclers/new")  // Mudou aqui: /new
+        mockMvc.perform(post("/api/v1/recyclers/new")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(dto)))
-            .andExpect(status().isCreated())  // Mudou aqui: 201 Created
+            .andExpect(status().isCreated())
             .andExpect(jsonPath("$.userId").value(savedUser.getId()))
             .andExpect(jsonPath("$.acceptedMaterials").isArray())
             .andExpect(jsonPath("$.acceptedMaterials.length()").value(2));
