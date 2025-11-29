@@ -4,13 +4,18 @@ import java.util.List;
 
 import com.reciclando.app.Models.enums.Material;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.ElementCollection;
 
 @Entity
 @Table(name = "recyclers")
@@ -23,7 +28,9 @@ public class Recycler {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "recycler_materials", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "material")
     @Enumerated(EnumType.STRING)
     private List<Material> acceptedMaterials;
 
