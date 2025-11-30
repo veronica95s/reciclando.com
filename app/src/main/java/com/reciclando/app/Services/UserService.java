@@ -1,6 +1,7 @@
 package com.reciclando.app.Services;
 
 import com.reciclando.app.Models.User;
+import com.reciclando.app.Models.Post;
 import com.reciclando.app.Repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,37 +33,52 @@ public class UserService {
     }
 
     // Atualizar usuário existente 
-
     public User updateUser(Long id, User updatedUser) {
         return userRepository.findById(id)
-
         .map(user -> {
-            
-            
             user.setFirstName(updatedUser.getFirstName());
             user.setLastName(updatedUser.getLastName());
             user.setPhone(updatedUser.getPhone());
             user.setAccountType(updatedUser.getAccountType());
             user.setAddress(updatedUser.getAddress());
             user.setPhotoPath(updatedUser.getPhotoPath());
-            
-            
             return userRepository.save(user);
         })
         .orElse(updatedUser);
-
     }
     
     //Deletar usuário
-
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
-    
     }
 
-        
-
     
-
     
+    public List<User> getUserByAccountType(String accountType) {
+        return List.of(); 
+    }
+
+    public List<User> getUserByCity(String city) {
+        return List.of(); 
+    }
+
+    public List<Post> getAnuncioDoUsuario(Long userId, String status) {
+        return List.of(); 
+    }
+
+    public List<Post> getHistoricoDoacoes(Long userId) {
+        return List.of(); 
+    }
+
+    public List<Post> getColetasDoReciclador(Long userId, String status) {
+        return List.of(); 
+    }
+
+    public List<Post> getHistoricoColetas(Long userId) {
+        return List.of(); 
+    }
+
+    public List<User> getRecicladoresPorCidade(String city) {
+        return List.of(); 
+    }
 }
