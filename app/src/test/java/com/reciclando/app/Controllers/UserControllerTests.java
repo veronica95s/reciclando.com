@@ -1,4 +1,4 @@
-package com.reciclando.app;
+package com.reciclando.app.Controllers;
 
 // Traz as classes necessárias para montar o teste.
 import com.fasterxml.jackson.databind.ObjectMapper;
