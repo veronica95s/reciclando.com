@@ -84,8 +84,8 @@ const Ads = () => {
         onCategoriesChange={onCategoriesChange}
       />
       <p className='mb-4'>{filteredAds.length} anúncios encontrados</p>
-      {filteredAds.map((ad) => (
-        <Card {...ad} />
+      {filteredAds.map((ad, idx) => (
+        <Card key={idx} {...ad} />
       ))}
     </div>
   );
