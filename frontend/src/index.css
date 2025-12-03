@@ -26,3 +26,15 @@ h1 {
 p {
   color: var(--light-font);
 }
+
+.btn-success {
+  background-color: var(--green);
+  color: #fff;
+  font-weight: 500;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: var(--btn-hover);
+  color: #fff;
+}

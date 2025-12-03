@@ -2,12 +2,6 @@ import { Search } from 'lucide-react';
 import styles from './SearchBar.module.css';
 
 export default function SearchBar({ placeholder, onSearchChange }) {
-  function handleKeyDown(event) {
-    if (event.key === 'Enter') {
-      onSearchChange(event);
-    }
-  }
-
   function handleClear(event) {
     if (event.target.value === '') {
       onSearchChange(event);
@@ -22,7 +16,6 @@ export default function SearchBar({ placeholder, onSearchChange }) {
         type='search'
         placeholder={placeholder}
         aria-label='Search'
-        onKeyDown={handleKeyDown}
         onChange={handleClear}
       ></input>
     </div>

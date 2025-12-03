@@ -1,14 +1,13 @@
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import Ads from './pages/Ads';
 
 function App() {
   return (
-    <>
-      <main>
-        <div className='container'>
-          <Ads />
-        </div>
-      </main>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/anuncios' element={<Ads />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

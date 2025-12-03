@@ -1,16 +1,16 @@
 import { MapPin, Clock4, UserRound, PhoneCall } from 'lucide-react';
 import Badge from '../ui/Badge/Badge';
-import styles from './Card.module.css';
+import styles from './AdCard.module.css';
 
 export default function Ad(props) {
   const {
-    imageSrc = 'src/assets/papelao.jpg',
+    imageSrc = 'https://placehold.co/600x400',
     title,
     description,
     donorName,
     donorContact,
     donorLocation,
-    categories,
+    category,
     createdAt,
   } = props;
 
@@ -23,7 +23,7 @@ export default function Ad(props) {
         <div className='col-md ms-4'>
           <div className='card-body'>
             <div className='mb-3 d-flex gap-2'>
-              {categories.map((category, idx) => (
+              {category.map((category, idx) => (
                 <Badge key={idx} value={category} />
               ))}
             </div>
@@ -54,9 +54,7 @@ export default function Ad(props) {
                 <PhoneCall size={20} />
                 <a href={`tel:${donorContact}`}>{donorContact}</a>
               </p>
-              <button
-                className={`btn d-flex align-items-center gap-2 mt-3 ${styles['btn-success']}`}
-              >
+              <button className='btn d-flex align-items-center gap-2 mt-3 btn-success'>
                 <svg
                   className='w-6 h-6 text-gray-800 dark:text-white'
                   aria-hidden='true'
