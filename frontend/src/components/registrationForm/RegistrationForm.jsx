@@ -4,7 +4,8 @@ import styles from "./RegistrationForm.module.css";
 export function RegistrationForm({ onSwitchToLogin }) {
   const [formData, setFormData] = useState({
     tipoUsuario: "comum",
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     cep: "",
@@ -45,7 +46,7 @@ export function RegistrationForm({ onSwitchToLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Cadastro realizado:", formData);
-    alert(`Cadastro realizado com sucesso!\n\nNome: ${formData.name}\nEmail: ${formData.email}`);
+    alert(`Cadastro realizado com sucesso!\n\nNome: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}`);
     onSwitchToLogin();
   };
 
@@ -82,20 +83,33 @@ export function RegistrationForm({ onSwitchToLogin }) {
         </div>
       </div>
 
-      {/* Nome Completo */}
+    
       <div className={styles.inputGroup}>
-        <label className={styles.label}>Nome Completo</label>
+        <label className={styles.label}>Nome</label>
         <input
           type="text"
-          name="name"
-          placeholder="Seu nome completo"
-          value={formData.name}
+          name="firstName"
+          placeholder="Nome"
+          value={formData.firstName}
           onChange={handleChange}
           className={styles.input}
         />
       </div>
 
-      {/* E-mail */}
+      
+      <div className={styles.inputGroup}>
+        <label className={styles.label}>Sobrenome</label>
+        <input
+          type="text"
+          name="lastName"
+          placeholder="Sobrenome"
+          value={formData.lastName}
+          onChange={handleChange}
+          className={styles.input}
+        />
+      </div>
+
+     
       <div className={styles.inputGroup}>
         <label className={styles.label}>E-mail</label>
         <input
@@ -108,7 +122,7 @@ export function RegistrationForm({ onSwitchToLogin }) {
         />
       </div>
 
-      {/* Senha */}
+      
       <div className={styles.inputGroup}>
         <label className={styles.label}>Senha</label>
         <input
@@ -121,7 +135,7 @@ export function RegistrationForm({ onSwitchToLogin }) {
         />
       </div>
 
-      {/* CEP e Cidade */}
+      
       <div className={styles.rowGroup}>
         <div className={styles.inputGroup}>
           <label className={styles.label}>CEP</label>
@@ -147,7 +161,7 @@ export function RegistrationForm({ onSwitchToLogin }) {
         </div>
       </div>
 
-      {/* Estado e CPF */}
+      
       <div className={styles.rowGroup}>
         <div className={styles.inputGroup}>
           <label className={styles.label}>Estado</label>
@@ -161,20 +175,10 @@ export function RegistrationForm({ onSwitchToLogin }) {
             maxLength={2}
           />
         </div>
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>CPF</label>
-          <input
-            type="text"
-            name="cpf"
-            placeholder="000.000.000-00"
-            value={formData.cpf}
-            onChange={handleChange}
-            className={styles.input}
-          />
-        </div>
+        
       </div>
 
-      {/* Telefone */}
+    
       <div className={styles.inputGroup}>
         <label className={styles.label}>Telefone de Contato</label>
         <input
@@ -187,10 +191,10 @@ export function RegistrationForm({ onSwitchToLogin }) {
         />
       </div>
 
-      {/* Campos exclusivos para Reciclador */}
+      
       {isReciclador && (
         <>
-          {/* Materiais aceitos */}
+          
           <div className={styles.inputGroup}>
             <label className={styles.label}>Materiais que você aceita</label>
             <div className={styles.checkboxGrid}>
@@ -257,7 +261,7 @@ export function RegistrationForm({ onSwitchToLogin }) {
             </div>
           </div>
 
-          {/* Disponibilidade */}
+          
           <div className={styles.inputGroup}>
             <label className={styles.label}>Disponibilidade</label>
             <input
