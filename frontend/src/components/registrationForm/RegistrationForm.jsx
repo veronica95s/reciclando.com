@@ -267,7 +267,7 @@ export function RegistrationForm({ onSwitchToLogin }) {
             <input
               type="text"
               name="disponibilidade"
-              placeholder="Ex: Segunda a Sexta, 8h às 18h"
+              placeholder="Ex: Segunda a Sexta, 10h às 18h"
               value={formData.disponibilidade}
               onChange={handleChange}
               className={styles.input}
