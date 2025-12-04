@@ -83,9 +83,7 @@ export function LoginForm() {
         Entrar
       </button>
 
-      <a href="#" className={styles.forgotPassword}>
-        Esqueceu sua senha?
-      </a>
+    
 
       
     </form>
