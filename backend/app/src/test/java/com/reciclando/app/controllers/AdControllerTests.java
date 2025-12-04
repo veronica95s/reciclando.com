@@ -74,7 +74,7 @@ public class AdControllerTests {
         public void testGetAdByFilter_Success() throws Exception {
                 String category = "Material1";
                 when(adService.getAdsOrderByCreatedAt(category, null)).thenReturn(List.of(ads.get(0)));
-                mockMvc.perform(get("/api/v1/ads?filter={filter}", "Material1"))
+                mockMvc.perform(get("/api/v1/ads?category={category}", "Material1"))
                                 .andExpect(status().isOk())
                                 .andExpect(jsonPath("$.length()").value(1))
                                 .andExpect(jsonPath("$[0].title").value("Title1"));
