@@ -1,13 +1,19 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import Ads from './pages/Ads';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HowToRecycle from "./pages/HowToRecycle";
+import Login from "./pages/Login";
+// import Ads from "./pages/Ads";
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path='/anuncios' element={<Ads />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/how-to-recycle" element={<HowToRecycle />} />
+        <Route path="/anuncios" element={<Ads />}> </Route>
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
