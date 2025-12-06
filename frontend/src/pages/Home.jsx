@@ -18,7 +18,7 @@ export default function Home() {
                         </ul>
                         <div className="home-buttons">
                             <button className="btn-primary">Anunciar Materiais</button>
-                            <button className="btn-outline">Ver catadores</button>
+                            <button className="btn-outline">Recicladores</button>
                         </div>
                     </div>
                     <div className="home-right">
