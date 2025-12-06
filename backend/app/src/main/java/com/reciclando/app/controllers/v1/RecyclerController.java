@@ -10,7 +10,6 @@ import com.reciclando.app.dtos.recycler.CreateRecyclerDTO;
 import com.reciclando.app.dtos.recycler.RecyclerDTO;
 import com.reciclando.app.dtos.recycler.RecyclerResponseDTO;
 import com.reciclando.app.dtos.recycler.UpdateMaterialsDTO;
-import com.reciclando.app.models.enums.Material;
 import com.reciclando.app.services.RecyclerService;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -28,9 +27,10 @@ public class RecyclerController {
     @GetMapping
     public ResponseEntity<List<RecyclerResponseDTO>> getRecyclers(
             @RequestParam(required = false) String city,
-            @RequestParam(required = false) Material material) {
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String search) {
 
-        var recyclers = recyclerService.search(city, material)
+        var recyclers = recyclerService.search(city, category, search)
                 .stream()
                 .map(RecyclerResponseDTO::fromRecycler)
                 .toList();
