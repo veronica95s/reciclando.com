@@ -1,5 +1,5 @@
-import { X, CircleCheckBig, CircleAlert } from "lucide-react";
-import styles from "./ModalInformations.module.css";
+import { X, CircleCheckBig, CircleAlert } from 'lucide-react';
+import styles from './ModalInformations.module.css';
 
 export function ModalInformations({ isOpen, onClose, material }) {
   if (!isOpen || !material) return null;
@@ -12,11 +12,11 @@ export function ModalInformations({ isOpen, onClose, material }) {
         </button>
 
         <div className={styles.modalHeader}>
-          <div 
-            className={styles.iconCircle} 
+          <div
+            className={styles.iconCircle}
             style={{ backgroundColor: material.color }}
           >
-            <material.icon size={40} strokeWidth={2} color="white" />
+            <material.icon size={40} strokeWidth={2} color='white' />
           </div>
           <h2>{material.title}</h2>
           <p className={styles.description}>{material.description}</p>
