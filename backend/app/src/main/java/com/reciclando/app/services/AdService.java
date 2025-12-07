@@ -7,38 +7,44 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.reciclando.app.dtos.ad.AdRequestDto;
-import com.reciclando.app.dtos.ad.AdResponseDto;
+import com.reciclando.app.dtos.ad.AdRequestDTO;
+import com.reciclando.app.dtos.ad.AdResponseDTO;
 import com.reciclando.app.models.Ad;
+import com.reciclando.app.models.Address;
 import com.reciclando.app.models.Donor;
 import com.reciclando.app.models.enums.Material;
 import com.reciclando.app.repositories.AdRepository;
+import com.reciclando.app.repositories.AddressRepository;
+import com.reciclando.app.repositories.DonorRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class AdService {
-    private final AdRepository postRepository;
-    private final DonorService donorService;
+    private final AdRepository adRepository;
+    private final DonorRepository donorRepository;
+    private final AddressRepository addressRepository;
     private final FileStorageService fileStorageService;
 
-    public AdService(AdRepository postRepository, DonorService donorService, FileStorageService fileStorageService) {
-        this.postRepository = postRepository;
-        this.donorService = donorService;
+    public AdService(AdRepository adRepository, DonorRepository donorRepository,
+            AddressRepository addressRepository, FileStorageService fileStorageService) {
+        this.adRepository = adRepository;
+        this.donorRepository = donorRepository;
+        this.addressRepository = addressRepository;
         this.fileStorageService = fileStorageService;
     }
 
     @Transactional(readOnly = true)
-    public List<AdResponseDto> getAdsOrderByCreatedAt(String category, String city) {
+    public List<AdResponseDTO> getAdsOrderByCreatedAt(String category, String city) {
         String[] categories = category != null ? category.split("--") : null;
-        List<Ad> ads = postRepository.findAllByOrderByCreatedAtDesc();
+        List<Ad> ads = adRepository.findAllByOrderByCreatedAtDesc();
         ads = ads.stream()
-                .filter(post -> {
+                .filter(ad -> {
                     if (categories == null || categories.length == 0) {
                         return true; // Se nenhuma categoria for fornecida, retorna todos os ads
                     }
                     for (String cat : categories) {
-                        for (Material m : post.getCategory()) {
+                        for (Material m : ad.getCategory()) {
                             if (m.name().equalsIgnoreCase(cat)) {
                                 return true;
                             }
@@ -47,60 +53,56 @@ public class AdService {
                     return false;
                 }).filter(ad -> {
                     if (city != null) {
-                        return ad.getDonor().getAddress().getCity().equals(city);
+                        return ad.getCity().equals(city);
                     }
                     return true;
                 })
                 .toList();
         return ads.stream()
-                .map(ad -> new AdResponseDto(
-                        ad.getId(),
-                        ad.getTitle(),
-                        ad.getDescription(),
-                        ad.getDonor().getFullName(),
-                        ad.getDonor().getContact(),
-                        ad.getLocationString(),
-                        ad.getCategory(),
-                        ad.getFormatedCreationDate(),
-                        ad.getImagesPath()))
+                .map(ad -> createResponseDTO(ad))
                 .toList();
     }
 
     @Transactional(readOnly = true)
-    public AdResponseDto getPostById(long id) {
-        Ad ad = postRepository.findById(id)
+    public AdResponseDTO getAdById(long id) {
+        Ad ad = adRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
-        return new AdResponseDto(
+        return createResponseDTO(ad);
+    }
+
+    @Transactional
+    public AdResponseDTO createAd(AdRequestDTO ad, MultipartFile[] files) {
+        Donor donor = donorRepository.findById(ad.getDonorId())
+                .orElseThrow(() -> new EntityNotFoundException("Donor not found"));
+
+        Address address = addressRepository.findByPostalCode(ad.getPostalCode());
+
+        if (address == null) {
+            address = new Address(ad.getPostalCode(), ad.getCity(), ad.getState(), ad.getNeighborhood());
+            addressRepository.save(address);
+        }
+
+        Ad newAd = new Ad(ad.getTitle(), ad.getDescription(), donor, ad.getCategory(), address);
+        newAd.setImagesPath(getImagePaths(files));
+
+        adRepository.save(newAd);
+        return createResponseDTO(newAd);
+    }
+
+    private AdResponseDTO createResponseDTO(Ad ad) {
+        return new AdResponseDTO(
                 ad.getId(),
                 ad.getTitle(),
                 ad.getDescription(),
                 ad.getDonor().getFullName(),
                 ad.getDonor().getContact(),
-                ad.getLocationString(),
                 ad.getCategory(),
-                ad.getFormatedCreationDate(),
+                ad.getPostalCode(),
+                ad.getCity(),
+                ad.getState(),
+                ad.getNeighborhood(),
+                ad.getCreatedAt().toString(),
                 ad.getImagesPath());
-    }
-
-    @Transactional
-    public AdResponseDto createPost(AdRequestDto post, MultipartFile[] files) {
-        Donor donor = donorService.findById(post.getDonorId())
-                .orElseThrow(() -> new EntityNotFoundException("Donor not found"));
-        Ad newPost = new Ad(post.getTitle(), post.getDescription(), donor, post.getCategory());
-
-        newPost.setImagesPath(getImagePaths(files));
-
-        postRepository.save(newPost);
-        return new AdResponseDto(
-                newPost.getId(),
-                newPost.getTitle(),
-                newPost.getDescription(),
-                newPost.getDonor().getFullName(),
-                newPost.getDonor().getContact(),
-                newPost.getLocationString(),
-                newPost.getCategory(),
-                newPost.getFormatedCreationDate(),
-                newPost.getImagesPath());
     }
 
     private List<String> getImagePaths(MultipartFile[] files) {

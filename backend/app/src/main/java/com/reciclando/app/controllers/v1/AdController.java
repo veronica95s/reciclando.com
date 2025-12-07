@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.reciclando.app.dtos.ad.AdRequestDto;
-import com.reciclando.app.dtos.ad.AdResponseDto;
+import com.reciclando.app.dtos.ad.AdRequestDTO;
+import com.reciclando.app.dtos.ad.AdResponseDTO;
 import com.reciclando.app.services.AdService;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -31,17 +31,17 @@ public class AdController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AdResponseDto>> getPosts(
+    public ResponseEntity<List<AdResponseDTO>> listAds(
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String city) {
-        List<AdResponseDto> posts = postService.getAdsOrderByCreatedAt(category, city);
+        List<AdResponseDTO> posts = postService.getAdsOrderByCreatedAt(category, city);
         return ResponseEntity.status(HttpStatus.OK).body(posts);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AdResponseDto> getPostById(@PathVariable long id) {
+    public ResponseEntity<AdResponseDTO> getAdById(@PathVariable long id) {
         try {
-            AdResponseDto post = postService.getPostById(id);
+            AdResponseDTO post = postService.getAdById(id);
             return ResponseEntity.status(HttpStatus.OK).body(post);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -49,10 +49,10 @@ public class AdController {
     }
 
     @PostMapping(path = "/new", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public ResponseEntity<AdResponseDto> createPost(@RequestPart AdRequestDto postRequest,
+    public ResponseEntity<AdResponseDTO> createPost(@RequestPart AdRequestDTO postRequest,
             @RequestPart MultipartFile[] files) {
         try {
-            AdResponseDto createdPost = postService.createPost(postRequest, files);
+            AdResponseDTO createdPost = postService.createAd(postRequest, files);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
