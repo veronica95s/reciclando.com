@@ -1,9 +1,8 @@
 package com.reciclando.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.io.TempDir;
 import org.springframework.mock.web.MockMultipartFile;
 
 import com.reciclando.app.config.FileStorageConfig;
-import com.reciclando.app.dtos.UploadFile.UploadFileDTO;
 import com.reciclando.app.exception.FileStorageException;
 import com.reciclando.app.services.FileStorageService;
 
@@ -32,7 +30,7 @@ public class FileStorageServiceTests {
     }
 
     @Test
-    void testShouldStoreFile_Success() {
+    void testShouldStoreFile_Success() throws Exception {
         byte[] content = "Old papers".getBytes();
         MockMultipartFile multipartFile = new MockMultipartFile(
                 "file",
@@ -42,22 +40,14 @@ public class FileStorageServiceTests {
 
         String fileName = fileStorageService.storeFile(multipartFile);
 
-        assertEquals("myImage.png", fileName);
-
-        UploadFileDTO fileDTO = new UploadFileDTO(
-                fileName,
-                "/api/v1/files/download/" + fileName,
-                multipartFile.getContentType(),
-                multipartFile.getSize());
-
-        assertEquals("myImage.png", fileDTO.getFileName());
-        assertTrue(fileDTO.getFileDownloadUri().contains("/api/v1/files/"));
-        assertEquals("image/png", fileDTO.getFileType());
-        assertEquals(multipartFile.getSize(), fileDTO.getFileSize());
+        assertTrue(fileName.contains("myImage.png"));
+        assertTrue(Files.exists(tempDir.resolve(fileName)));
+        assertEquals(content.length, Files.size(tempDir.resolve(fileName)));
+        assertArrayEquals(content, Files.readAllBytes(tempDir.resolve(fileName)));
     }
 
     @Test
-    void testShouldStoreFile_Fail() {
+    void testShouldStoreFile_Fail() throws Exception {
         byte[] content = "Old papers".getBytes();
         MockMultipartFile multipartFile = new MockMultipartFile(
                 "file",
