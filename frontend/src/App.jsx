@@ -1,16 +1,23 @@
-import Header from "./components/Header"; 
-import Home from "./pages/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+import Home from "./pages/Home";
+import RecyclerProfile from "./pages/RecyclerProfile/RecyclerProfile";
 
 function App() {
   return (
-    <main>
-      <Header /> 
-      <Home />
+    <Router>
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/reciclador" element={<RecyclerProfile />} />
+      </Routes>
+
       <Footer />
-    
-    </main>
+    </Router>
   );
 }
 
