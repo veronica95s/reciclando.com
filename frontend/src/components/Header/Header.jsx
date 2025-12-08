@@ -17,7 +17,9 @@ export default function Header(){
     return(
         <header className="header">  
             <div className="header-left">  
-                <img src={logo} alt="logo" />         
+                <Link to="/">
+                    <img src={logo} alt="logo" />
+                </Link>         
             </div>
 
             <nav className="menu">
