@@ -6,6 +6,7 @@ import AdsFilter from "../../components/AdsFilter/AdsFilter";
 import UserAdCard from "../../components/UserAdCard/UserAdCard";
 import ConfirmDeleteModal from "../../components/ConfirmDeleteModal/ConfirmDeleteModal";
 import ConcludeAdModal from "../../components/ConcludeAdModal/ConcludeAdModal";
+import FeedbackModal from "../../components/FeedbackModal/FeedbackModal";
 import "../../index.css";
 import styles from "./UserProfile.module.css";
 
@@ -22,7 +23,8 @@ export default function UserProfile() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [adToDelete, setAdToDelete] = useState(null);
   const [isConcludeModalOpen, setIsConcludeModalOpen] = useState(false);
-  const [adToConclude, setAdToConclude] = useState(null); 
+  const [adToConclude, setAdToConclude] = useState(null);
+  const [feedbackModal, setFeedbackModal] = useState({ isOpen: false, type: '', message: '' });
 
   
   useEffect(() => {
@@ -97,9 +99,35 @@ export default function UserProfile() {
       ));
       setIsConcludeModalOpen(false);
       setAdToConclude(null);
+      
+      // Mostrar modal de sucesso
+      setFeedbackModal({
+        isOpen: true,
+        type: 'success',
+        message: 'Anúncio concluído com sucesso!'
+      });
     } catch (error) {
       console.error("Erro ao concluir anúncio:", error);
-      alert("Erro ao concluir anúncio. Verifique o código do reciclador e tente novamente.");
+      setIsConcludeModalOpen(false);
+      setAdToConclude(null);
+      
+      // Determinar mensagem de erro
+      let errorMessage = 'Erro ao concluir anúncio. Tente novamente.';
+      
+      if (error.response?.status === 400) {
+        errorMessage = 'Código do reciclador incorreto. Verifique e tente novamente.';
+      } else if (error.response?.status === 404) {
+        errorMessage = 'Anúncio não encontrado.';
+      } else if (error.code === 'ERR_NETWORK') {
+        errorMessage = 'Erro de conexão. Verifique se o servidor está rodando.';
+      }
+      
+      // Mostrar modal de erro
+      setFeedbackModal({
+        isOpen: true,
+        type: 'error',
+        message: errorMessage
+      });
     }
   };
 
@@ -187,6 +215,13 @@ export default function UserProfile() {
         onClose={cancelConclude}
         onConfirm={confirmConclude}
         adTitle={adToConclude?.title || ""}
+      />
+
+      <FeedbackModal 
+        isOpen={feedbackModal.isOpen}
+        onClose={() => setFeedbackModal({ isOpen: false, type: '', message: '' })}
+        type={feedbackModal.type}
+        message={feedbackModal.message}
       />
     </div>
   );

@@ -36,7 +36,8 @@ export function LoginForm() {
         password: '123456',
         tipo: 'reciclador',
         firstName: "Carlos",
-        lastName: "Silva"
+        lastName: "Silva",
+        code: "5678"
       },
     };
 

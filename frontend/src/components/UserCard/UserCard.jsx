@@ -24,6 +24,13 @@ export default function UserCard({ user, adsStats }) {
         Membro desde {new Date().toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}
       </p>
 
+      {user.code && (
+        <div className={styles.userInfoSection}>
+          <h3>Código de Coleta</h3>
+          <p className={styles.recyclerCode}>{user.code}</p>
+        </div>
+      )}
+
       <div className={styles.userInfoSection}>
         <h3>Email</h3>
         <p>{user.email || "usuario@teste.com"}</p>

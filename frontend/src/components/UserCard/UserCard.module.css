@@ -54,6 +54,14 @@
   color: var(--black);
 }
 
+.recyclerCode {
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  color: var(--green) !important;
+  letter-spacing: 2px;
+  font-family: 'Courier New', monospace;
+}
+
 .statsTitle {
   text-align: left;
   font-size: 16px;
