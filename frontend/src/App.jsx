@@ -18,6 +18,8 @@ function App() {
         <Route path='/user-profile' element={<UserProfile />} />
         <Route path='/recycler-profile' element={<RecyclerProfile />} />
         <Route path='/recicladores' element={<Recyclers />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/como-reciclar' element={<HowToRecycle />} />
       </Routes>
     </Router>
   );
