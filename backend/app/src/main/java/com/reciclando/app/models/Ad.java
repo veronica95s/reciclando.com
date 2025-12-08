@@ -46,6 +46,8 @@ public class Ad {
     @Enumerated(EnumType.STRING)
     private List<Material> category;
 
+    private String status;
+    private String conclusionCode;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -68,6 +70,7 @@ public class Ad {
         this.donor = donor;
         this.category = category;
         this.address = address;
+        this.status = "active";
     }
 
     public Long getId() {
@@ -122,6 +125,22 @@ public class Ad {
         this.category = category;
     }
 
+    public String getConclusionCode() {
+        return conclusionCode;
+    }
+
+    public void setConclusionCode(String conclusionCode) {
+        this.conclusionCode = conclusionCode;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -149,8 +168,7 @@ public class Ad {
     @Override
     public String toString() {
         return "Ad [id=" + id + ", title=" + title + ", description=" + description + ", imagesPath=" + imagesPath
-                + ", address=" + address + ", donor=" + donor + ", category=" + category + ", createdAt=" + createdAt
-                + ", updatedAt=" + updatedAt + "]";
+                + ", address=" + address + ", donor=" + donor + ", category=" + category + ", status=" + status
+                + ", conclusionCode=" + conclusionCode + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
     }
-
 }

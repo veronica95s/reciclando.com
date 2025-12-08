@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -55,6 +58,40 @@ public class AdController {
             AdResponseDTO createdPost = postService.createAd(postRequest, files);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
         } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+    @GetMapping("/donor/{donorId}")
+    public ResponseEntity<List<AdResponseDTO>> getAdsByDonor(@PathVariable Long donorId) {
+        try {
+            List<AdResponseDTO> ads = postService.getAdsByDonorId(donorId);
+            return ResponseEntity.status(HttpStatus.OK).body(ads);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAd(@PathVariable Long id) {
+        try {
+            postService.deleteAd(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @PatchMapping("/{id}/conclude")
+    public ResponseEntity<AdResponseDTO> concludeAd(
+            @PathVariable Long id,
+            @RequestParam String recyclerCode) {
+        try {
+            AdResponseDTO concludedAd = postService.concludeAd(id, recyclerCode);
+            return ResponseEntity.status(HttpStatus.OK).body(concludedAd);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }

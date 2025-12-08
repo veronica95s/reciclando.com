@@ -16,6 +16,7 @@ import com.reciclando.app.models.enums.Material;
 import com.reciclando.app.repositories.AdRepository;
 import com.reciclando.app.repositories.AddressRepository;
 import com.reciclando.app.repositories.DonorRepository;
+import com.reciclando.app.repositories.RecyclerRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -27,11 +28,14 @@ public class AdService {
     private final FileStorageService fileStorageService;
 
     public AdService(AdRepository adRepository, DonorRepository donorRepository,
-            AddressRepository addressRepository, FileStorageService fileStorageService) {
+            AddressRepository addressRepository, RecyclerRepository recyclerRepository,
+            FileStorageService fileStorageService) {
         this.adRepository = adRepository;
         this.donorRepository = donorRepository;
         this.addressRepository = addressRepository;
         this.fileStorageService = fileStorageService;
+        this.recyclerRepository = recyclerRepository;
+
     }
 
     @Transactional(readOnly = true)
@@ -59,8 +63,16 @@ public class AdService {
                 })
                 .toList();
         return ads.stream()
-                .map(ad -> createResponseDTO(ad))
-                .toList();
+                .map(ad -> createResponseDTO(ad)).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<AdResponseDTO> getAdsByDonorId(Long donorId) {
+        Donor donor = donorRepository.findById(donorId)
+                .orElseThrow(() -> new EntityNotFoundException("Donor not found"));
+        List<Ad> ads = adRepository.findByDonorOrderByCreatedAtDesc(donor);
+        return ads.stream()
+                .map(ad -> createResponseDTO(ad)).toList();
     }
 
     @Transactional(readOnly = true)
@@ -111,5 +123,35 @@ public class AdService {
             imagesPath.add(fileStorageService.getStoredFiles(file));
         }
         return imagesPath;
+    }
+
+    @Transactional
+    public void deleteAd(Long id) {
+        Ad ad = adRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
+        adRepository.delete(ad);
+    }
+
+    @Transactional
+    public AdResponseDTO concludeAd(Long id, String recyclerCode) {
+        Ad ad = adRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
+
+        if (!"active".equals(ad.getStatus())) {
+            throw new IllegalArgumentException("Only active ads can be concluded");
+        }
+
+        if (recyclerCode == null || recyclerCode.trim().isEmpty()) {
+            throw new IllegalArgumentException("Recycler code is required");
+        }
+
+        if (recyclerRepository.findByCode(recyclerCode) != null) {
+            ad.setStatus("concluded");
+            ad.setConclusionCode(recyclerCode);
+            adRepository.save(ad);
+            return createResponseDTO(ad);
+        }
+
+        throw new IllegalArgumentException("Invalid confirmation code");
     }
 }

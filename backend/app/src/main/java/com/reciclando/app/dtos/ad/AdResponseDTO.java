@@ -16,6 +16,7 @@ public class AdResponseDTO {
     private String neighborhood;
     private String createdAt;
     private List<String> imagesPath;
+    private String status;
 
     public AdResponseDTO(Long id, String title, String description, String donorName, String donorContact,
             List<Material> category, String postalCode, String city, String state, String neighborhood,
@@ -31,6 +32,7 @@ public class AdResponseDTO {
         this.neighborhood = neighborhood;
         this.createdAt = createdAt;
         this.imagesPath = imagesPath;
+        this.status = "active"; // default
     }
 
     public long getId() {
@@ -79,5 +81,9 @@ public class AdResponseDTO {
 
     public List<String> getImagesPath() {
         return imagesPath;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
