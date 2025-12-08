@@ -1,10 +1,10 @@
 import Categories from '../Categories/Categories';
 import styles from './AdForm.module.css';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import STATES_LIST from '../../utils/statesList';
 
-export default function Form() {
+export default function Form({ id }) {
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
@@ -32,23 +32,49 @@ export default function Form() {
       category: categories,
     };
 
-    const formData = new FormData();
-    formData.append('files', image);
-    formData.append(
+    const form = new FormData();
+    form.append('files', image);
+    form.append(
       'postRequest',
       new Blob([JSON.stringify(body)], { type: 'application/json' })
     );
 
+    const url = id
+      ? `http://localhost:8081/api/v1/ads/${id}`
+      : 'http://localhost:8081/api/v1/ads/new';
+
     try {
-      const response = await axios.post(
-        'http://localhost:8081/api/v1/ads/new',
-        formData
+      const response = adId
+        ? await axios.put(url, payload)
+        : await axios.post(url, payload);
+
+      console.log(
+        adId ? 'Dados atualizados com sucesso:' : 'Dados enviados com sucesso:',
+        response.data
       );
-      console.log('Dados do formulário enviados com sucesso:', response.data);
     } catch (error) {
       console.error('Erro ao enviar dados do formulário:', error);
     }
   };
+
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8081/api/v1/ads/${id}`
+        );
+
+        setFormData(response.data);
+        setCategories(response.data.category);
+      } catch (error) {
+        console.error('Erro ao buscar dados do anúncio:', error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   return (
     <div className={styles['form-container']} style={{ maxWidth: '800px' }}>
@@ -56,11 +82,7 @@ export default function Form() {
       <p>
         Preencha os dados abaixo para criar seu anúncio de materiais recicláveis
       </p>
-      <form
-        className='row g-3'
-        onSubmit={handleSubmit}
-        encType='multipart/form-data'
-      >
+      <form className='row g-3' onSubmit={handleSubmit}>
         <div className='col-md-12'>
           <label htmlFor='title' className='form-label'>
             Título do Anúncio
@@ -89,18 +111,20 @@ export default function Form() {
             style={{ height: '120px' }}
           ></textarea>
         </div>
-        <div className='col-md-12'>
-          <label htmlFor='adImage' className='form-label'>
-            Foto do Material
-          </label>
-          <input
-            type='file'
-            name='adImage'
-            className='form-control'
-            id='adImage'
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-        </div>
+        {!id && (
+          <div className='col-md-12'>
+            <label htmlFor='adImage' className='form-label'>
+              Foto do Material
+            </label>
+            <input
+              type='file'
+              name='adImage'
+              className='form-control'
+              id='adImage'
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+          </div>
+        )}
         <div className='col-md-12 mb-0'>
           <label htmlFor='category' className='form-label'>
             Categoria
