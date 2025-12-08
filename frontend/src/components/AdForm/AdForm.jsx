@@ -1,24 +1,39 @@
 import Categories from '../Categories/Categories';
 import styles from './AdForm.module.css';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
+import adFormValidation from '../../utils/adFormValidation';
+import { useNavigate } from 'react-router-dom';
+import { scrollToView } from '../../utils/scrollToView';
+import { adsService } from '../../services/api';
+import { useFetchAd } from '../../hooks/useFetchAdData';
+import { useViaCep } from '../../hooks/useViaCep';
 
-export default function Form({ id }) {
+export default function Form({ id, donorId }) {
+  const navigate = useNavigate();
+  const goToProfile = () => {
+    navigate(`/user-profile`);
+  };
+
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState(null);
   const [address, setAddress] = useState({});
+  const [errors, setErrors] = useState({});
+  const [isValidPostalCode, setIsValidPostalCode] = useState(true);
   const [formData, setFormData] = useState({
     image: '',
     title: '',
     description: '',
     category: [],
-    donorId: 1,
+    donorId: donorId,
     city: '',
     state: '',
     postalCode: '',
     donorContact: '',
     donorEmail: '',
   });
+
+  useFetchAd(id, setFormData, setCategories);
+  useViaCep(formData.postalCode, setAddress, setIsValidPostalCode);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,84 +42,46 @@ export default function Form({ id }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const body = {
-      ...formData,
-      category: categories,
-      city: address.localidade,
-      state: address.uf,
-    };
+    const body = setBody();
 
-    const payload = new FormData();
+    const errorFields = adFormValidation(body, image, id, isValidPostalCode);
+    setErrors(errorFields);
+    scrollToView(Object.keys(errorFields)[0]);
 
-    if (image) {
-      payload.append('image', image);
+    if (Object.keys(errorFields).length > 0) {
+      return;
     }
 
-    payload.append(
-      'postRequest',
-      new Blob([JSON.stringify(body)], { type: 'application/json' })
-    );
-
-    const url = id
-      ? `http://localhost:8081/api/v1/ads/${id}`
-      : 'http://localhost:8081/api/v1/ads/new';
-
     try {
-      const response = id
-        ? await axios.put(url, body)
-        : await axios.post(url, payload);
+      if (!id) {
+        const payload = new FormData();
+        payload.append('files', image);
+        payload.append(
+          'postRequest',
+          new Blob([JSON.stringify(body)], { type: 'application/json' })
+        );
+        const response = await adsService.create(payload);
+        console.log('Dados enviados com sucesso:', response.data);
+      } else {
+        const response = await adsService.update(id, body);
+        console.log('Dados atualizados com sucesso:', response.data);
+      }
 
-      console.log(
-        id ? 'Dados atualizados com sucesso:' : 'Dados enviados com sucesso:',
-        response.data
-      );
+      goToProfile();
     } catch (error) {
       console.error('Erro ao enviar dados do formulário:', error);
     }
   };
 
-  useEffect(() => {
-    if (!id) return;
-
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8081/api/v1/ads/${id}`
-        );
-
-        setFormData(response.data);
-        setCategories(response.data.category);
-      } catch (error) {
-        console.error('Erro ao buscar dados do anúncio:', error);
-      }
+  const setBody = () => {
+    return {
+      ...formData,
+      category: categories,
+      city: address.localidade,
+      state: address.uf,
+      neighborhood: address.bairro,
     };
-
-    fetchData();
-  }, [id]);
-
-  useEffect(() => {
-    const postal = formData.postalCode?.replace(/\D/g, '');
-    if (!postal || postal.length !== 8) {
-      setAddress({});
-      return;
-    }
-
-    const fetchAddress = async () => {
-      try {
-        const response = await axios.get(
-          `https://viacep.com.br/ws/${formData.postalCode}/json/`
-        );
-
-        setAddress(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar endereço:', error);
-      }
-    };
-
-    if (formData.postalCode) {
-      fetchAddress();
-    }
-  }, [formData.postalCode]);
+  };
 
   return (
     <div className={styles['form-container']} style={{ maxWidth: '800px' }}>
@@ -125,7 +102,18 @@ export default function Form({ id }) {
             value={formData.title}
             onChange={handleChange}
             placeholder='Ex: Papelão e garrafas PET para doação'
+            style={
+              errors.title
+                ? {
+                    borderColor: 'red',
+                    boxShadow: 'none',
+                  }
+                : {}
+            }
           />
+          {errors.title && (
+            <small className='text-danger'>{errors.title}</small>
+          )}
         </div>
         <div className='col-md-12'>
           <label htmlFor='description' className='form-label'>
@@ -138,26 +126,53 @@ export default function Form({ id }) {
             name='description'
             value={formData.description}
             onChange={handleChange}
+            style={
+              errors.description
+                ? {
+                    borderColor: 'red',
+                    boxShadow: 'none',
+                  }
+                : {}
+            }
           ></textarea>
+          {errors.description && (
+            <small className='text-danger'>{errors.description}</small>
+          )}
         </div>
         {!id && (
           <div className='col-md-12'>
-            <label htmlFor='adImage' className='form-label'>
+            <label htmlFor='image' className='form-label'>
               Foto do Material
             </label>
             <input
               type='file'
-              name='adImage'
+              name='image'
               className='form-control'
-              id='adImage'
+              id='image'
               onChange={(e) => setImage(e.target.files[0])}
+              style={
+                errors.image
+                  ? {
+                      borderColor: 'red',
+                      boxShadow: 'none',
+                    }
+                  : {}
+              }
             />
+            {errors.image && (
+              <small className='text-danger'>{errors.image}</small>
+            )}
           </div>
         )}
         <div className='col-md-12 mb-0'>
-          <label htmlFor='category' className='form-label'>
+          <label htmlFor='category' className='form-label' id='category'>
             Categoria
           </label>
+          {errors.category && (
+            <div>
+              <small className='text-danger'>{errors.category}</small>
+            </div>
+          )}
           <Categories
             categories={categories}
             onCategoriesChange={setCategories}
@@ -179,7 +194,23 @@ export default function Form({ id }) {
                   name='postalCode'
                   value={formData.postalCode}
                   onChange={handleChange}
+                  style={
+                    errors.postalCode || !isValidPostalCode
+                      ? {
+                          borderColor: 'red',
+                          boxShadow: 'none',
+                        }
+                      : {}
+                  }
                 />
+                {errors.postalCode && (
+                  <small className='text-danger'>{errors.postalCode}</small>
+                )}
+                {!isValidPostalCode && (
+                  <small className='text-danger' style={{ display: 'block' }}>
+                    Cep inválido
+                  </small>
+                )}
               </div>
               <div className='mt-0'>
                 <label htmlFor='neighborhood' className='form-label'>
@@ -207,6 +238,11 @@ export default function Form({ id }) {
                   name='city'
                   value={address.localidade}
                   disabled
+                  style={
+                    errors.postalCode || !isValidPostalCode
+                      ? { marginBottom: '35px' }
+                      : {}
+                  }
                 />
               </div>
               <div className='mt-0'>
@@ -240,7 +276,18 @@ export default function Form({ id }) {
                 name='donorContact'
                 value={formData.donorContact}
                 onChange={handleChange}
+                style={
+                  errors.donorContact
+                    ? {
+                        borderColor: 'red',
+                        boxShadow: 'none',
+                      }
+                    : {}
+                }
               />
+              {errors.donorContact && (
+                <small className='text-danger'>{errors.donorContact}</small>
+              )}
             </div>
             <div className='col-md'>
               <label htmlFor='donorEmail' className='form-label'>
@@ -254,14 +301,29 @@ export default function Form({ id }) {
                 name='donorEmail'
                 value={formData.donorEmail}
                 onChange={handleChange}
+                style={
+                  errors.donorEmail
+                    ? {
+                        borderColor: 'red',
+                        boxShadow: 'none',
+                      }
+                    : {}
+                }
               />
+              {errors.donorEmail && (
+                <small className='text-danger'>{errors.donorEmail}</small>
+              )}
             </div>
           </div>
         </div>
         <div
           className={`col-12 d-flex align-item-center gap-4 ${styles['button-wrapper']}`}
         >
-          <button className={`btn ${styles['btn-secondary']}`} type='button'>
+          <button
+            className={`btn ${styles['btn-secondary']}`}
+            type='button'
+            onClick={goToProfile}
+          >
             Cancelar
           </button>
           <button type='submit' className='btn btn-success'>

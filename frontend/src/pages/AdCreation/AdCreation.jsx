@@ -8,7 +8,7 @@ export default function AdCreation() {
         <p className='mb-4'>
           Publique seu anúncio e encontre um reciclador próximo a você
         </p>
-        <AdForm />
+        <AdForm donorId={1} />
       </div>
     </main>
   );
