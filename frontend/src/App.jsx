@@ -15,6 +15,8 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/como-reciclar' element={<HowToRecycle />} />
         <Route path='/anuncios' element={<Ads />} />
+        <Route path='/anuncios/novo' element={<AdCreation />} />
+        <Route path='/anuncios/edicao/:id' element={<AdUpdate />} />'
         <Route path='/user-profile' element={<UserProfile />} />
         <Route path='/recycler-profile' element={<RecyclerProfile />} />
         <Route path='/recicladores' element={<Recyclers />} />
