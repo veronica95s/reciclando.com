@@ -1,0 +1,499 @@
+[33mcommit 96d99af434de29bb37e01b4a3e3fc0afb002a151[m[33m ([m[1;31morigin/fix/corrige-header-footer-home[m[33m, [m[1;31mcorreto/fix/corrige-header-footer-home[m[33m, [m[1;32mfix/corrige-header-footer-home[m[33m)[m
+Author: MarcelleDev <devmarcelle94@gmail.com>
+Date:   Tue Dec 9 18:00:25 2025 -0300
+
+    fix: correções no header, footer e home
+
+[33mcommit c320bb136f61e568b7b37b6fe877a09f5b45cc5c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Merge: dbb583c 3ad0906
+Author: Veronica Andrade <107998091+veronica95s@users.noreply.github.com>
+Date:   Tue Dec 9 13:17:08 2025 -0300
+
+    Merge pull request #9 from veronica95s/feat/add-put-endpoit-for-ads
+    
+    Adiciona rota de atualização dos anúncios
+
+[33mcommit dbb583c8e960d91413fb502092b4cc2f98f8adf5[m
+Merge: 744514f b6efdcb
+Author: Veronica Andrade <107998091+veronica95s@users.noreply.github.com>
+Date:   Tue Dec 9 13:13:55 2025 -0300
+
+    Merge pull request #7 from veronica95s/Paginação
+    
+    Paginação
+
+[33mcommit 3ad09062334e17ee44efcfdc9081e7174ab87680[m
+Merge: 1390b83 744514f
+Author: Vitória Ferreira <vits.ferreira@hotmail.com>
+Date:   Tue Dec 9 09:59:19 2025 -0300
+
+    Merge branch 'main' into feat/add-put-endpoit-for-ads
+
+[33mcommit b6efdcb343cba06a8763b9eabe7bae9611c4ff8f[m
+Merge: aac8eb4 744514f
+Author: Veronica Andrade <107998091+veronica95s@users.noreply.github.com>
+Date:   Tue Dec 9 08:23:50 2025 -0300
+
+    Merge branch 'main' into Paginação
+
+[33mcommit 744514f4243f5b0c64cb866a4c759a3192225fb0[m
+Merge: d4bb8c6 d51c9d3
+Author: Veronica Andrade <107998091+veronica95s@users.noreply.github.com>
+Date:   Tue Dec 9 08:19:21 2025 -0300
+
+    Merge pull request #4 from veronica95s/feat/add-ads_creation-page
+    
+    Adiciona páginas de criação e edição de anúncios
+
+[33mcommit d51c9d3aa2cdc8ecdce51a69272a452f9f0e5fde[m
+Author: Vitória Ferreira <vits.ferreira@hotmail.com>
+Date:   Mon Dec 8 20:51:57 2025 -0300
+
+    add ad creation and update
+
+[33mcommit c2b3a6bfd2be2d472620c4a7172df723078001cf[m[33m ([m[1;31morigin/feature/recycler-profile[m[33m, [m[1;32mfeature/recycler-profile[m[33m)[m
+Author: MarcelleDev <devmarcelle94@gmail.com>
+Date:   Mon Dec 8 18:21:35 2025 -0300
+
+    feat(frontend): implementa página completa do perfil do reciclador
+
+[33mcommit 40ca9283459bded1611639926d0ac4a4c4fa3b9f[m
+Merge: a6f33c4 d4bb8c6
+Author: Veronica Andrade <107998091+veronica95s@users.noreply.github.com>
+Date:   Mon Dec 8 14:19:22 2025 -0300
+
+    Merge branch 'main' into Paginação
+
+[33mcommit a6f33c4f505c6409f37a746c19b98cf077643945[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Mon Dec 8 14:16:15 2025 -0300
+
+    'Paginação'
+
+[33mcommit 58e88ee132f8f03018ac98640ecde5cf52651a21[m
+Merge: ea251ce 3f88427
+Author: Vitória Ferreira <vits.ferreira@hotmail.com>
+Date:   Mon Dec 8 11:48:42 2025 -0300
+
+    Merge branch 'main' into feat/add-ads_creation-page
+
+[33mcommit 69b4c1700a851797a21ec5a9b7e70e30ae56715d[m
+Merge: 7feb399 80b38f8
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Mon Dec 8 11:14:16 2025 -0300
+
+    Merge main: Keep Home route and update paths to Portuguese
+
+[33mcommit 5ad40facbc984280486d2518b7fade10f5a1b64d[m
+Merge: 5cf8c2c 80b38f8
+Author: Vitória Ferreira <vits.ferreira@hotmail.com>
+Date:   Mon Dec 8 11:07:54 2025 -0300
+
+    fix conflicts and merge
+
+[33mcommit 19417053d4774636ef162c54afda5180d55776e1[m
+Merge: c2e5039 80b38f8
+Author: Veronica Andrade <107998091+veronica95s@users.noreply.github.com>
+Date:   Mon Dec 8 11:00:55 2025 -0300
+
+    Merge branch 'main' into feature/home-header-footer
+
+[33mcommit 80b38f8e6f9821418c083ae61bde1910e6db1958[m
+Merge: 7dfd4b5 b7b64a3
+Author: Veronica Andrade <107998091+veronica95s@users.noreply.github.com>
+Date:   Mon Dec 8 10:59:16 2025 -0300
+
+    Merge pull request #2 from veronica95s/fix/update-ad-controller
+    
+    Atualiza ad controller
+
+[33mcommit b7b64a3b6c143f996aeef6490cb1a561bfff5a2e[m
+Author: Vitória Ferreira <vits.ferreira@hotmail.com>
+Date:   Mon Dec 8 10:52:07 2025 -0300
+
+    move recycler dto to its own folder and update ad response dto
+
+[33mcommit c2e503999894172162644bf8c0f53bed64daa7cf[m
+Merge: 83c640b 4595dce
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Mon Dec 8 10:51:31 2025 -0300
+
+    Merge and update .gitignore to exclude target/ and node_modules/
+
+[33mcommit f077de4a0f98dc9905b4bd8786b3bc23064d5e0c[m
+Merge: 5736e98 7dfd4b5
+Author: Vitória Ferreira <vits.ferreira@hotmail.com>
+Date:   Mon Dec 8 10:46:39 2025 -0300
+
+    merge and fix conflicts
+
+[33mcommit 4595dced65dcf7a425e277030a120523ab553fd3[m
+Merge: 1280eef 7dfd4b5
+Author: Veronica Andrade <107998091+veronica95s@users.noreply.github.com>
+Date:   Mon Dec 8 10:33:59 2025 -0300
+
+    Merge branch 'main' into feature/home-header-footer
+
+[33mcommit 7feb3997a0c49c38bd03ac4477561f0382c6c6b7[m
+Merge: 7dfd4b5 1280eef
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Mon Dec 8 10:27:05 2025 -0300
+
+    Merge feature/home-header-footer: Added Home page with Header and Footer components
+
+[33mcommit 7dfd4b5f86e09484d3c7810f10886c3feb9fb0af[m
+Merge: d705329 dbca959
+Author: Veronica Andrade <107998091+veronica95s@users.noreply.github.com>
+Date:   Mon Dec 8 09:38:26 2025 -0300
+
+    Merge pull request #5 from veronica95s/UserProfile
+    
+    User profile
+
+[33mcommit 57a9cd1720c3ce6ad41eafcf83b25ab936e44ef0[m
+Author: MarcelleDev <devmarcelle94@gmail.com>
+Date:   Sun Dec 7 16:46:25 2025 -0300
+
+    Minhas alterações do perfil do reciclador
+
+[33mcommit 5736e980f1e944e7aa337bddb2f7b91418f6f73b[m[33m ([m[1;31morigin/fix/update-ad-controller[m[33m)[m
+Merge: dbe9d3d d705329
+Author: Vitória Ferreira <vits.ferreira@hotmail.com>
+Date:   Sun Dec 7 14:42:27 2025 -0300
+
+    fix conflicts
+
+[33mcommit 9a5a0f665d55ebbc2db312300a365653b4161635[m[33m ([m[1;31morigin/UserProfile[m[33m)[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Sun Dec 7 12:16:30 2025 -0300
+
+    'Profiles'
+
+[33mcommit eb1a3b3b6eae8a2197ca7d7b4fa6ad97ed4c8661[m
+Merge: e669834 8981638
+Author: MarcelleDev <devmarcelle94@gmail.com>
+Date:   Sat Dec 6 15:00:13 2025 -0300
+
+    Merge branch 'feature/home-header-footer' of https://github.com/itsvferreira/reciclando.com into feature/home-header-footer
+
+[33mcommit 89816383f1e9be7697fb88f6c186fc5db2b794e4[m
+Merge: db95a00 d705329
+Author: Marcelle <152077737+MarcelleDev@users.noreply.github.com>
+Date:   Sat Dec 6 14:50:59 2025 -0300
+
+    Merge branch 'main' into feature/home-header-footer
+
+[33mcommit 9b4e90259e4c555e78b53994f2d9879c7e0510f0[m
+Merge: 22b85c3 d705329
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Sat Dec 6 10:53:15 2025 -0300
+
+    Merge branch 'main' into UserProfile
+
+[33mcommit d705329246e19b950fb0b0c503505eaff1a6d3b3[m
+Merge: 64778ed 5889665
+Author: Veronica Andrade <107998091+veronica95s@users.noreply.github.com>
+Date:   Sat Dec 6 09:17:57 2025 -0300
+
+    Merge pull request #29 from itsvferreira/feat/add-recyclers-page
+    
+    Cria página de listagem dos recicladores
+
+[33mcommit e606111c7a86efbb495f0597962db49f574fe52a[m[33m ([m[1;31morigin/fix/update-recyclers-controller[m[33m)[m
+Merge: dde7334 52dbb79
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Fri Dec 5 21:44:23 2025 -0300
+
+    Merge branch 'fix/update-recyclers-controller' of github.com:itsvferreira/reciclando.com into fix/update-recyclers-controller
+
+[33mcommit dde7334e265e8ed8010e1be6dfba35bc845632e4[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Fri Dec 5 21:19:21 2025 -0300
+
+    fix: breaking test
+
+[33mcommit 9494c2a1ec9d9a71fe934a12c807e7c1ad2d8bd2[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Fri Dec 5 21:08:39 2025 -0300
+
+    fix: update controller and tests
+
+[33mcommit 2dd290fa1dd5b3995808b399e1760c2ddff3e7bd[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Fri Dec 5 20:59:21 2025 -0300
+
+    move recycler dtos to own folder
+
+[33mcommit 58896656aee919b47f2f255bb6f2858b5c0dd9d2[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Fri Dec 5 20:57:00 2025 -0300
+
+    move file to folders
+
+[33mcommit 55eabc51bdcf88c791953ade97914565efbb5c9f[m
+Merge: d54e944 64778ed
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Fri Dec 5 20:49:37 2025 -0300
+
+    merge main and fix conflicts
+
+[33mcommit d54e9440b4d6c91b2eae5ac2a002ee71c551ef7a[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Fri Dec 5 20:19:57 2025 -0300
+
+    fix: add navigation to recycler profile
+
+[33mcommit 6065cf5b6857f8753b42ba154abbb54f1985e5e4[m
+Merge: b400509 45c4627
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Fri Dec 5 19:57:46 2025 -0300
+
+    Merge branch 'main' into feat/add-recyclers-page
+
+[33mcommit b4005097a411c235436dc1ee3d532ec4c5a011b3[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Thu Dec 4 16:37:16 2025 -0300
+
+    feat: add recyclers page
+
+[33mcommit bd24b4a847cb8171ec862cfb09259dfeb2641c03[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Mon Dec 1 11:06:23 2025 -0300
+
+    organize files and add react
+
+[33mcommit c362863a8b0fd13f815c05ba470cb34fa83d6c75[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Mon Dec 1 11:06:23 2025 -0300
+
+    organize files and add react
+
+[33mcommit 18417246151d4197751a8ffa608e102127afb5dc[m
+Merge: f9986c8 13e56a8
+Author: MarcelleDev <devmarcelle94@gmail.com>
+Date:   Mon Dec 1 10:50:18 2025 -0300
+
+    Merge branch 'main' into feature/crud-user-controller
+
+[33mcommit 13e56a8d8e292cce60f944a75602389c935b7e7f[m
+Merge: d921422 16a9899
+Author: Vitória Ferreira <68161607+itsvferreira@users.noreply.github.com>
+Date:   Mon Dec 1 10:36:22 2025 -0300
+
+    Merge pull request #22 from itsvferreira/CorreçãoRecycler
+    
+    'teste'
+
+[33mcommit 16a9899fd162beb185514b38fdf35d4d03d724e6[m[33m ([m[1;31morigin/CorreçãoRecycler[m[33m)[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Mon Dec 1 08:59:47 2025 -0300
+
+    'teste'
+
+[33mcommit 89a552c1cd2e5d8da1a080cc6befdf87cb6b3302[m
+Merge: 31ec99d d921422
+Author: Marcelle <152077737+MarcelleDev@users.noreply.github.com>
+Date:   Sun Nov 30 15:52:22 2025 -0300
+
+    Merge branch 'main' into feature/crud-user-controller
+
+[33mcommit d921422bf7e8c3be46a540ed87677f860daf6204[m
+Merge: 35d2fe4 a146d24
+Author: Vitória Ferreira <68161607+itsvferreira@users.noreply.github.com>
+Date:   Sat Nov 29 13:59:50 2025 -0300
+
+    Merge pull request #21 from itsvferreira/CorreçãoRecycler
+    
+    Correção recycler
+
+[33mcommit a146d2467956b7939a66d9cc1b96c4777fe4b569[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Fri Nov 28 16:10:40 2025 -0300
+
+    "Remoção Teste CreateRecycler'
+
+[33mcommit bcacd5f934900bc4f65db9ff6b5b3b3250cc4165[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Fri Nov 28 15:46:40 2025 -0300
+
+    'Correção merge'
+
+[33mcommit 35d2fe4868d3230f43fbc4eb2a100eb3579f1604[m
+Merge: 700246e 4389119
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Fri Nov 28 15:36:05 2025 -0300
+
+    Merge branch 'main' of github.com:itsvferreira/reciclando.com into main
+
+[33mcommit 58f9c48f8a4114bd55e5966d1b4d304eebba19e2[m[33m ([m[1;31morigin/RecyclerController/Service[m[33m)[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Fri Nov 28 15:33:47 2025 -0300
+
+    'Correção'
+
+[33mcommit 438911956415e793398c5b611a5454e3da100aad[m
+Merge: 4d029a8 99569bc
+Author: Vitória Ferreira <68161607+itsvferreira@users.noreply.github.com>
+Date:   Fri Nov 28 15:25:14 2025 -0300
+
+    Merge pull request #15 from itsvferreira/RecyclerController/Service
+    
+    Recycler controller/service
+
+[33mcommit 99569bc09cefbe1c64f85c63664c4b6810fb35b0[m
+Merge: d32d737 9df62ea
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Fri Nov 28 15:13:04 2025 -0300
+
+    Merge branch 'RecyclerController/Service' of https://github.com/itsvferreira/reciclando.com into RecyclerController/Service
+
+[33mcommit 9df62ea8a7ab19f128ff6e1f3267b8f14920ab16[m
+Merge: 584d459 4d029a8
+Author: Veronica Andrade <107998091+veronica95s@users.noreply.github.com>
+Date:   Fri Nov 28 15:05:42 2025 -0300
+
+    Merge branch 'main' into RecyclerController/Service
+
+[33mcommit cc31277137ccfc6ad911758e1ee9520c6182d992[m
+Merge: 0e74092 60be18a
+Author: Vitória Ferreira <68161607+itsvferreira@users.noreply.github.com>
+Date:   Fri Nov 28 14:55:33 2025 -0300
+
+    Merge pull request #14 from itsvferreira/feat/add-posts-crud-and-tests
+    
+    Criar rotas e testes para anúncios
+
+[33mcommit 7e813e836adfa561f21ed5714a299c35e3ebc0e8[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Fri Nov 28 13:32:32 2025 -0300
+
+    'Correções'
+
+[33mcommit 450a80ca3f70e973a03d78bf87fdc1669d1f7c24[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Fri Nov 28 10:48:15 2025 -0300
+
+    'Correçoes'
+
+[33mcommit 32d2418015cdae760eb1b3f810723fb0181bbb98[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Fri Nov 28 09:37:03 2025 -0300
+
+    'ControllerTest'
+
+[33mcommit 0ce1ee0ff5ee75d22ff1acd808e72bb647c083f7[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Thu Nov 27 12:01:33 2025 -0300
+
+    add donors new getters and change entity from post to ad
+
+[33mcommit e3acf31da8ced6f861b7682b7789ed9a6d5fa7dd[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Thu Nov 27 11:54:57 2025 -0300
+
+    'dto'
+
+[33mcommit dd8919f3c1dfa1cd54c7a69454f0ae83ba66bc8e[m
+Merge: 15f34e2 0e74092
+Author: MarcelleDev <devmarcelle94@gmail.com>
+Date:   Thu Nov 27 10:50:25 2025 -0300
+
+    Merge remote-tracking branch 'origin/main' into feature/crud-user-controller
+
+[33mcommit 8356f1199eea4309f3610b7eca522422e2df1101[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Thu Nov 27 10:47:03 2025 -0300
+
+    'Correção'
+
+[33mcommit 987092dc6711a043d2024b8e1543eb3afbcc6a88[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Thu Nov 27 09:58:04 2025 -0300
+
+    'RecyclerController e RecyclerService'
+
+[33mcommit a97a99ea8463c7f2f59b01586dbceb9a1d7dc6f1[m[33m ([m[1;31morigin/ServiceRecycler[m[33m)[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Thu Nov 27 09:38:55 2025 -0300
+
+    'Controler'
+
+[33mcommit d0d28a4295d35557d7688f185ec08719a69020b2[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Thu Nov 27 09:09:52 2025 -0300
+
+    'Service'
+
+[33mcommit 408451de1468ddaf572a6fe2fdd4179f35f9fd39[m
+Merge: 098ecc2 38cf5a3
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Wed Nov 26 17:43:50 2025 -0300
+
+    Merge branch 'main' into ServiceRecycler
+
+[33mcommit 38cf5a38468b29e8b031475ec1c2b15d6953f4ab[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Wed Nov 26 17:40:11 2025 -0300
+
+    fix: spring-boot conflicted version
+
+[33mcommit 098ecc29ccca1ba57d4281d2b79833c765ddee88[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Wed Nov 26 15:10:18 2025 -0300
+
+    'Service Recicler'
+
+[33mcommit 7c31eafa8914c899c2d98304aec8a6193de3238a[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Wed Nov 26 11:26:03 2025 -0300
+
+    remove folders
+
+[33mcommit ae50eb090e71541aa4131a84559a6bfa7e7c32f6[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Wed Nov 26 10:51:25 2025 -0300
+
+    'uppercase'
+
+[33mcommit 0aef765f241ddc9167950024a120dedf2b374682[m
+Merge: a2ac104 f929646
+Author: Veronica Andrade <107998091+veronica95s@users.noreply.github.com>
+Date:   Wed Nov 26 10:25:05 2025 -0300
+
+    Merge pull request #9 from itsvferreira/fix/improvate-database-config
+    
+    Aprimora modelagem do banco e adiciona seed
+
+[33mcommit f929646d440d064acd00a2450476e27e8a9152b8[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Wed Nov 26 10:14:59 2025 -0300
+
+    remove unecessary files
+
+[33mcommit f5a2874f815c27bfe873e7d4e2caf1e62e0bbcba[m
+Merge: 4b37c48 a2ac104
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Wed Nov 26 10:00:25 2025 -0300
+
+    Merge branch 'main' into fix/improvate-database-config
+
+[33mcommit 4b37c48ad3ef6d5548e505f737ab2981ad670827[m
+Author: Vitória Ferreira <vitoriasouzaf@hotmail.com>
+Date:   Wed Nov 26 09:59:55 2025 -0300
+
+    apply changes on db configuration and add seed
+
+[33mcommit a2ac104ebcaaa457eadf7c787b1e7fb9e22ad072[m
+Merge: e06a50e 3d084f3
+Author: Vitória Ferreira <68161607+itsvferreira@users.noreply.github.com>
+Date:   Tue Nov 25 19:37:30 2025 -0300
+
+    Merge pull request #8 from itsvferreira/Revisão-Entidades
+    
+    'Revisao Entidades'
+
+[33mcommit 3d084f3c5bdc6da53bf68c839040e1faa9e580bb[m[33m ([m[1;31morigin/Revisão-Entidades[m[33m)[m
+Author: veronica95s <veronica.wq83@gmail.com>
+Date:   Tue Nov 25 19:12:05 2025 -0300
+
+    'Revisão Entidades'

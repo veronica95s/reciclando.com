@@ -3,6 +3,7 @@ import './Header.css';
 import logo from '../assets/logohori.png';
 import { Menu, X } from 'lucide-react';
 
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
